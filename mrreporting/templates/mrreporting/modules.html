@@ -2,5 +2,16 @@
 {% block content %}
 
 <h1>Welcome to Module Registration Services - Modules</h1>
+{% for Module in modules %}
+<article class="media content-section">
+    <div class="media-body">
+    <div class="article-metadata"> 
+    </div>
+    <h2><a class="article-title" href="#">{{ Module }}</a></h2>
+    <p class="article-content">{{ Module.description}}</p>
+    <small class="mr-2">Module Credit {{ Module.credit}}</small>
+    </div>
+    </article>
+    {% endfor %}
 
 {% endblock content %}
