@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from users.models import Profile
 
 
 # Create your models here.
@@ -7,7 +8,7 @@ class Course(models.Model):
     name = models.CharField(max_length=255)
     level = models.FloatField()
     students = models.ManyToManyField(User, related_name='courses')
-
+    
     def __str__(self):
         return self.name
     

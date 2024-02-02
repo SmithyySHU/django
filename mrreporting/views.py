@@ -19,6 +19,12 @@ def module(request):
     module_pull = {'modules': Module.objects.all(), 'title': 'Module List'}
     return render(request, 'mrreporting/modules.html', module_pull)
 
+
+
 def course(request):
-    course_pull = {'course': Course.objects.all(), 'title': 'Course List'}
-    return render(request, 'mrreporting/course.html', course_pull)
+    courses = Course.objects.all()
+    for course in courses:
+        print(f"Course: {course.name}")
+        for module in course.allowed_modules.all():
+            print(f"Module: {module.name}")
+    return render(request, 'mrreporting/course.html', {'courses': courses})

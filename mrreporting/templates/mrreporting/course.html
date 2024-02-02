@@ -2,14 +2,41 @@
 {% block content %}
 
 <h1>Welcome to Modules Registration Services - Courses</h1>
-{% for Course in course %}
+{% for Course in courses %}
 <article class="media content-section">
     <div class="media-body">
     <div class="article-metadata"> 
     </div>
     <h2><a class="article-title" href="#">{{ Course }}</a></h2>
-    <p class="article-content">Course Level: {{ Course.level}}</p>
-    </div>
+    <p class="article-content">Course Level: {{ Course.level }}</p>
+
+    <h3 class="article-content">Modules:</h3>
+            <table class="article-content">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Credit</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for module in Course.allowed_modules.all %}
+                        <tr>
+                            <td>{{ module.name }}</td>
+                            <td>{{ module.code }}</td>
+                            <td>{{ module.credit }}</td>
+                            <td>{{ module.category }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </article>
     {% endfor %}
+
 {% endblock content %}
+
+</body>
+</html>
+
