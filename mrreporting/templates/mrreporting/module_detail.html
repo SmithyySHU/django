@@ -9,5 +9,32 @@
     <i class="bi-puzzle-fill non-mobile mr-1"></i>{{ module.name }}
 </h2>
 
+<div class="row"> 
+    {% if is_registered %}
+    <!-- Student Is Registered -->
+        <div class="col-md-12 col-lg-8 text-center">
+            <h4 class="text-success mt-1"><i class="bi bi-check-all"></i> YOU ARE REGISTERED FOR THIS MODULE</h4>
+        </div>
+        <div class="col-md-12 col-lg-4 text-center">
+            <form method="post" action="{% url 'mrreporting:remove_registration' registration.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Remove Registration</button>
+            </form>
+        </div>
+    {% else %}
+    <!-- Student Is Not Registered -->
+        <div class="col-md-12 col-lg-6 text-center">
+            <h4 class="text-success mt-2"><i class="bi bi-check2"></i> AVAILABLE FOR YOUR COURSE</h4>
+        </div>
+        <div class="col-md-12 col-lg-6 text-center">
+            <form method="post" action="{% url 'mrreporting:register_for_module' module.id %}">>
+                {% csrf_token %}
+                {{ form | crispy }}
+                <button type="submit" class="btn btn-success btn-lg">Register For This Module</button>
+            </form>
+        </div>
+    {% endif %}
+  </div>
+
 {% endblock content %}
 

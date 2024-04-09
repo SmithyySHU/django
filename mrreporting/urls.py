@@ -20,6 +20,8 @@ urlpatterns = [
     path('logout', auth_views.LogoutView.as_view(template_name = 'users/logout.html'), name='logout'),
     path('profile', user_views.profile, name = 'profile'),
     path('course', views.course, name = 'course'),
-    path('module/<str:code>/', mrreporting_views.ModuleDetailView.as_view(), name = 'module')
+    path('module/<str:code>/', mrreporting_views.ModuleDetailView.as_view(), name = 'module'),
+    path('module/<int:pk>/register/', mrreporting_views.register_for_module, name='register_for_module'),            
+    path('remove-registration/<int:pk>/', mrreporting_views.remove_registration, name='remove_registration'),       
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

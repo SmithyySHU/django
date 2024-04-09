@@ -22,7 +22,7 @@ def update_user_courses(sender, instance, **kwargs):
     """
     students = instance.students.all()
     if students.count() > 1:
-        # If a student is assigned to more than one course, remove them from other courses
+        
         for student in students.exclude(pk=instance.students.first().pk):
             student.courses.clear()
     
@@ -39,13 +39,11 @@ class Module(models.Model):
         return self.name
     
 
-# Model for User to register for Module
 class Registration(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='registered_users')
     registered = models.DateTimeField(auto_now_add=True)
 
-    # can only register for module once
     class Meta:
         unique_together = ('module', 'user')
 
