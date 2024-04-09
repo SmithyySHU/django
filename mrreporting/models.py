@@ -37,3 +37,21 @@ class Module(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+# Model for User to register for Module
+class Registration(models.Model):
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='registered_users')
+    registered = models.DateTimeField(auto_now_add=True)
+
+    # can only register for module once
+    class Meta:
+        unique_together = ('module', 'user')
+
+    def __str__(self):
+       
+        return f'{self.module.name} [{self.module.code}]: {self.user.first_name} {self.user.last_name} at {self.registered.strftime("%d/%m/%Y %H:%M")}'
+    
+
+

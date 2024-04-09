@@ -7,7 +7,7 @@
     <div class="media-body">
     <div class="article-metadata"> 
     </div>
-    <h2><a class="article-title" href="#">{{ Module }}</a></h2>
+    <h2><a class="article-title" href="{% url 'mrreporting:module' code=Module.code %}">{{ Module }}</a></h2>
     <p class="article-content">{{ Module.description}}</p>
     <small class="mr-2">Module Credit {{ Module.credit}}</small>
     </div>

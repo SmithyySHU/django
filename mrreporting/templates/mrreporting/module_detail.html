@@ -1,0 +1,13 @@
+{% extends "mrreporting/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!-- Module Details Page -->
+<h1 class="module"><i class="bi-puzzle-fill"></i> Module<span class="badge badge-secondary float-right" title="Module Code"><span class="hidden">Code:</span>{{ module.code }}</span></h1>
+
+<!-- Module Header --> 
+<h2 class="module-header">
+    <i class="bi-puzzle-fill non-mobile mr-1"></i>{{ module.name }}
+</h2>
+
+{% endblock content %}
+
