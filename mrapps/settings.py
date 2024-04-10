@@ -73,9 +73,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mrapps.wsgi.application'
 
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / 'emails'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
 
 DATABASES = {
     'default': {

@@ -1,0 +1,29 @@
+{% extends "mrreporting/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1>My Registrations</h1>
+
+<!-- Users Registrations-->
+<div class="content-section">
+
+
+    <!-- User Modules -->
+    <h3>Your Modules</h3>
+
+    <ul class="basic-list">
+
+        <!-- Loop through each of the users module registrations -->
+        {% for registration in registrations %}
+            <li>
+              
+                <!-- Registration Details-->
+                <a href="{% url 'mrreporting:module' code=registration.module.code %}" > {{ registration.module.name }}</a> | <small class="text-muted"><strong>Registered:</strong> {{ registration.registered }}</small>
+            </li>
+        {% endfor %}
+
+    </ul>
+        
+</div>
+
+{% endblock content %}

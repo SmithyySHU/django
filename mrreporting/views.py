@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView, FormView
 from .models import Module, Registration, Course
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ContactForm
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
@@ -100,3 +100,41 @@ def course(request):
         for module in course.allowed_modules.all():
             print(f"Module: {module.name}")
     return render(request, 'mrreporting/course.html', {'courses': courses})
+
+
+
+class MyRegistrationsListView(ListView):
+    model = Registration
+    template_name = 'mrreporting/my_registrations.html'
+    context_object_name = 'registrations'
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.request.user)
+        return Registration.objects.filter(user=user).order_by('module__name')
+    
+
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'mrreporting/contact.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactFormView, self).get_context_data(**kwargs)
+        context.update({'title': 'Contact Us'})
+
+
+        return context
+    
+    def form_valid(self, form):
+
+        messages.success(self.request, 'Successfully sent the enquiry')
+
+        return form.send_mail(), super().form_valid(form)
+        
+
+
+    def form_invalid(self, form):
+        messages.warning(self.request, 'Unable to send the enquiry')
+        return super().form_invalid(form)
+    
+    def get_success_url(self):
+        return self.request.path
