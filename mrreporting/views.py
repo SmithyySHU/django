@@ -128,7 +128,10 @@ class ContactFormView(FormView):
 
         messages.success(self.request, 'Successfully sent the enquiry')
 
-        return form.send_mail(), super().form_valid(form)
+        form.send_mail()
+        
+        return super().form_valid(form)
+        
         
 
 
