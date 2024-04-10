@@ -2,14 +2,37 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <!-- Module Details Page -->
-<h1 class="module"><i class="bi-puzzle-fill"></i> Module<span class="badge badge-secondary float-right" title="Module Code"><span class="hidden">Code:</span>{{ module.code }}</span></h1>
+<h1 class="module"><i class="bi-puzzle-fill"></i>Module<span class="badge badge-secondary float-right" title="Module Code"><span class="hidden">Code:</span>{{ module.code }}</span></h1>
 
 <!-- Module Header --> 
 <h2 class="module-header">
-    <i class="bi-puzzle-fill non-mobile mr-1"></i>{{ module.name }}
+    <i class="bi-puzzle-fill non-mobile mr-1"></i>
+    {{ module.name }}
 </h2>
 
+<br>
+
+<p class="module">
+    <i class="bi-puzzle-fill non-mobile mr-1">Description:</i>
+    {{ module.description }}
+
+    <br>
+
+    <i class="bi-puzzle-fill non-mobile mr-1">Category:</i>
+    {{ module.category }}
+
+    <br>
+
+    <i class="bi-puzzle-fill non-mobile mr-1">Credit:</i>
+    {{ module.credit }}
+
+
+
+</p>
+
 <div class="row"> 
+
+ 
     {% if is_registered %}
     <!-- Student Is Registered -->
         <div class="col-md-12 col-lg-8 text-center">
