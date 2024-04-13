@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AnonymousUser
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
+
 
 
 # Create your views here.
@@ -16,8 +18,8 @@ def about(request) :
     return render(request, 'mrreporting/about.html', {'title' : 'About Us'})
 
 
-def contact(request) :
-    return render(request, 'mrreporting/contact.html', {'title' : 'Contact Us'})
+#def contact(request) :
+ ##   return render(request, 'mrreporting/contact.html', {'title' : 'Contact Us'})
 
 
 def module(request):
@@ -124,20 +126,45 @@ class ContactFormView(FormView):
 
         return context
     
-    def form_valid(self, form):
+    def contact(self, request):
+        if request.method == 'POST':
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                name = form.cleaned_data['name']
+                email = form.cleaned_data['email']
 
-        messages.success(self.request, 'Successfully sent the enquiry')
+                message = form.cleaned_data['message']
+                EmailMessage(
+                    'Contact Form Submission from {}'.format(name),
+                    message,
+                    'form-response@SIT.com',
+                    ['c0033267@shu.ac.uk'],
+                    [],
+                    reply_to=[email]
+                ).send() 
+                messages.success(self.request, 'Successfully sent the enquiry')
+                return super().form_valid(form)
+            
+            else:
 
-        form.send_mail()
+                form = ContactForm()
+                return render(request, 'mrreporting/contact.html', {'form': form}) 
+            
+    
+   ## def form_valid(self, form):
+
+      ###  messages.success(self.request, 'Successfully sent the enquiry')
+
+      ###  form.send_mail()
+       ### 
+        ###return super().form_valid(form)
         
-        return super().form_valid(form)
-        
         
 
 
-    def form_invalid(self, form):
-        messages.warning(self.request, 'Unable to send the enquiry')
-        return super().form_invalid(form)
+  ##  def form_invalid(self, form):
+    ###    messages.warning(self.request, 'Unable to send the enquiry')
+    ###    return super().form_invalid(form)
     
     def get_success_url(self):
-        return self.request.path
+          return self.request.path

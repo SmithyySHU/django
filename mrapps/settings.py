@@ -73,8 +73,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mrapps.wsgi.application'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / 'emails'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '524e1d01e7572e'
+EMAIL_HOST_PASSWORD = '********8ee0'
+EMAIL_PORT = '2525'
+
+
+# EMAIL_FILE_PATH = BASE_DIR / 'emails'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
