@@ -103,6 +103,23 @@ def course(request):
             print(f"Module: {module.name}")
     return render(request, 'mrreporting/course.html', {'courses': courses})
 
+class CourseDetailView(DetailView):
+    model = Course
+    
+    def get_object(self, queryset=None):
+        code = self.kwargs['code']
+        return get_object_or_404(Course, code=code)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        course = self.get_object()
+        allowed_modules = course.allowed_modules.all()  # Access modules allowed for the course
+        
+        context['course'] = course
+        context['allowed_modules'] = allowed_modules
+        
+        return context
 
 
 class MyRegistrationsListView(ListView):

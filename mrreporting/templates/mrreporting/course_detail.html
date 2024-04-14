@@ -1,0 +1,45 @@
+{% extends "mrreporting/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h1 class="course"><i class="bi-puzzle-fill"></i>Course<span class="badge badge-secondary float-right" title="Course Code"><span class="hidden">Code:</span>{{ course.code }}</span></h1>
+
+ 
+<h2 class="course-header">
+    <i class="bi-puzzle-fill non-mobile mr-1"></i>
+    {{ course.name }}
+</h2>
+
+<br>
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata"> 
+        </div>
+        <h2><a class="article-title" href="#">{{ course }}</a></h2>
+        <p class="article-content">Course Description: {{ course.description }}</p>
+
+        <h3 class="article-content">Modules:</h3>
+        <table class="article-content">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Code</th>
+                    <th>Credit</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for module in course.allowed_modules.all %}
+                    <tr>
+                        <td>{{ module.name }}</td>
+                        <td>{{ module.code }}</td>
+                        <td>{{ module.credit }}</td>
+                        <td>{{ module.category }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</article>
+
+{% endblock content %}

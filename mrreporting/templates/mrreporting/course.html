@@ -1,13 +1,20 @@
 {% extends "mrreporting/base.html" %}
 {% block content %}
 
-<h1>Welcome to Modules Registration Services - Courses</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 offset-md-2">
+            <h1 class="mb-4">Module Registration Services - Courses</h1>
+        </div>
+        
+    </div>
+</div>
 {% for Course in courses %}
 <article class="media content-section">
     <div class="media-body">
     <div class="article-metadata"> 
     </div>
-    <h2><a class="article-title" href="#">{{ Course }}</a></h2>
+    <h2><a class="article-title" href="{% url 'mrreporting:courses' code=Course.code %}">{{ Course }}</a></h2>
     <p class="article-content">Course Level: {{ Course.level }}</p>
 
     <h3 class="article-content">Modules:</h3>

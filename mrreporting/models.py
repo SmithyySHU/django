@@ -3,13 +3,18 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from users.models import Profile
-
+from django.urls import reverse
 
 # Create your models here.
 class Course(models.Model):
     name = models.CharField(max_length=255)
+    code = models.CharField(max_length=10)
     level = models.FloatField()
     students = models.ManyToManyField('auth.User', related_name='courses')
+    description = models.TextField()
+    
+    def get_absolute_url(self):
+        return reverse('course', args=[self.code])
     
     def __str__(self):
         return self.name

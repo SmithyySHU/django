@@ -22,6 +22,7 @@ urlpatterns = [
     path('course', views.course, name = 'course'),
     path('my-registrations', mrreporting_views.MyRegistrationsListView.as_view(), name = 'my_registrations'),
     path('module/<str:code>/', mrreporting_views.ModuleDetailView.as_view(), name = 'module'),
+    path('course/<str:code>/', mrreporting_views.CourseDetailView.as_view(), name = 'courses'),
     path('module/<int:pk>/register/', mrreporting_views.register_for_module, name='register_for_module'),            
     path('remove-registration/<int:pk>/', mrreporting_views.remove_registration, name='remove_registration'),       
 

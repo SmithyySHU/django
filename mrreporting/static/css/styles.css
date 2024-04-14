@@ -102,3 +102,39 @@ html {
     line-height: 50px;
     background-color: #cccccc;
   }
+
+  .about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .about-heading {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .about-text {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+
+  .home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .home-heading {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .home-text {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: justify;
+  } 
