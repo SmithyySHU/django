@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-y_!krmw+82g8^3f1c4ws&!c!*o8j-keg!u1ndn!a2j!)$d*=wv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['dev-moduleapplication.azurewebsites.net']
 
@@ -147,3 +147,4 @@ CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'mrreporting:home'
 LOGIN_URL = 'login'
+ENABLE_ORYX_BUILD = True
