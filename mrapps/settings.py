@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +21,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y_!krmw+82g8^3f1c4ws&!c!*o8j-keg!u1ndn!a2j!)$d*=wv'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-y_!krmw+82g8^3f1c4ws&!c!*o8j-keg!u1ndn!a2j!)$d*=wv')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['dev-moduleapplication.azurewebsites.net']
+WEBSITE_HOSTNAME = os.environ.get('WEBSITE_HOSTNAME', None) 
+DEBUG = WEBSITE_HOSTNAME == None 
 
+
+if DEBUG: 
+
+    ALLOWED_HOSTS = [] 
+
+else: 
+
+    ALLOWED_HOSTS = [WEBSITE_HOSTNAME] 
+
+    CSRF_TRUSTED_ORIGINS = [f'https://{WEBSITE_HOSTNAME}']
 
 # Application definition
 
